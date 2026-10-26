@@ -1,15 +1,26 @@
-import {test as baseTest} from '@playwright/test';
-import {LoginPage} from '../pages/LoginPage';
+import { test as baseTest } from '@playwright/test';
+import { LoginPage } from '../pages/LoginPage';
+import { DashboardPage } from '../pages/DashboardPage';
+import { UserPage } from '../pages/UserPage';
 
 type MyFixtures = {
-FixtureLogin : LoginPage;
+    fixtureLogin: LoginPage;
+    dashboardPage: DashboardPage;
+    userPage: UserPage;
 
 }
 
-export const test =  
-baseTest.extend<MyFixtures>({
-FixtureLogin: async ({page}, use) =>{
-const objPage = new LoginPage(page);
-await use(objPage);
-}
-})
+export const test =
+    baseTest.extend<MyFixtures>({
+        fixtureLogin: async ({ page }, use) => {
+            const objPage = new LoginPage(page);
+            await use(objPage);
+        },
+        dashboardPage: async ({page}, use) =>{
+            await use(new DashboardPage(page));
+        },
+        userPage: async ({page}, use)=>{
+            await use(new UserPage(page));
+        }
+
+    })

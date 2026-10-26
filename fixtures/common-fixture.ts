@@ -1,17 +1,17 @@
-import { test as baseTest } from '../fixtures/pom-fixture';
+import { test as baseTest } from './pom-fixture';
 import CommonUtils from '../utils/commonUtils';
 
-export type commonfixtureType = {
+type commonfixtureType = {
   commonutils: CommonUtils;
 }
 
 
-export const test = 
-    baseTest.extend<commonfixtureType>({
+export const test =
+  baseTest.extend<commonfixtureType>({
 
-    commonutils: async({}, use)=>{
+    commonutils: async ({ }, use) => {
       await use(new CommonUtils());
 
     }
 
-})
+  })

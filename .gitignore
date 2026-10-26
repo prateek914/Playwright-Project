@@ -6,3 +6,5 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+// $ ENCRYPTION_KEY=wishinfinite npm run test_Demo_CR_HD - bash command to run the test with encryption key

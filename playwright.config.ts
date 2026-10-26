@@ -8,8 +8,8 @@ import dotenv from 'dotenv';
 // import dotenv from 'dotenv';
 // import path from 'path';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
-dotenv.config({ 
-  path: process.env.ENV_NAME ? `./env-files/.env.${process.env.ENV_NAME}` : './env-files/.env.demo'  
+dotenv.config({
+  path: process.env.ENV_NAME ? `./env-files/.env.${process.env.ENV_NAME}` : './env-files/.env.demo'
 });
 
 
@@ -20,14 +20,17 @@ export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: false,
+  /* Exclude certain files from the test run */
+  //testIgnore: ['**/temp-test.spec.ts'],
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  //workers: process.env.CI ? 1 : undefined,
+  workers: 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['html', { open: 'only-on-failure' }],['github']],
+  reporter: [['html', { open: 'always' }], ['github']],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
@@ -43,20 +46,44 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'Setup',
+      testMatch: '**/global-setup.spec.ts',
     },
-/*
+    // {
+    //   name: 'chromium',
+    //   dependencies: ['Setup'],
+    //   use: { ...devices['Desktop Chrome'],
+    //     storageState: './playwright/.auth/.auth.json'
+    //    },
+    // },
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      name: 'chromium',
+      testMatch: '**/*.spec.ts',
+      testIgnore: '**/global-setup.spec.ts',
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: './playwright/.auth/.auth.json',
+      },
+      dependencies: ['Setup'],
     },
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
-*/
+    /*
+        {
+          name: 'firefox',
+          dependencies: ['Setup'],
+          use: { ...devices['Desktop Firefox'],
+          storageState: './playwright/.auth/.auth.json'
+           },
+        },
+    
+        {
+          name: 'webkit',
+          dependencies: ['Setup'],
+          use: { ...devices['Desktop Safari'],
+          storageState: './playwright/.auth/.auth.json'
+           },
+        },
+    */
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
