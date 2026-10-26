@@ -1,4 +1,4 @@
-import {Locator, Page} from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 
 export class LoginPage {
     // Define locators for the login page elements
@@ -17,7 +17,7 @@ export class LoginPage {
 
     async goToOrageHRMLoginPage() {
         // Navigate to the OrangeHRM login page
-            await this.page.goto(`${process.env.Base_URL}/web/index.php/auth/login`);
+        await this.page.goto(`${process.env.BASE_URL}/web/index.php/auth/login`);
     }
 
     async logInOrangeHRM(username: string, password: string) {
