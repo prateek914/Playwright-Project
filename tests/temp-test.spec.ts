@@ -11,10 +11,12 @@ import { test } from '../fixtures/hook-fixture';
 
 test('first test', async ({ page, gotoURL }) => {
     await expect(page).toHaveTitle('OrangeHRM');
+    console.log("first test executed successfully");
 })
 
 test('second test', async ({ page, gotoURL, logout }) => {
     await expect(page).toHaveTitle('OrangeHRM');
+    console.log("second test executed successfully");
 })
 // if you are not using the fixture, you can directly use the LoginPage class in your test
 /*
