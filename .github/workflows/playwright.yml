@@ -17,12 +17,23 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps chromium
-    - name: Run Playwright tests
-      run: npx playwright test
+    
+    - name: Check encryption key configuration
+      run: |
+        if [ -n "$ENCRYPTION_KEY" ]; then
+          echo "ENCRYPTION_KEY is available"
+        else
+          echo "ENCRYPTION_KEY is missing"
+          exit 1
+        fi
+      env:
+        ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
+
     - name: Run Playwright tests
       run: npx playwright test
       env:
-        ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}  
+        ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
+
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
