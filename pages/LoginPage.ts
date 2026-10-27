@@ -6,6 +6,7 @@ export class LoginPage {
     readonly usernameInput: Locator;
     readonly passwordInput: Locator;
     readonly loginButton: Locator;
+    readonly errorMessage: Locator;
 
     constructor(page: Page) {
         // Initialize the page and locators
@@ -13,6 +14,7 @@ export class LoginPage {
         this.usernameInput = page.locator("input[name='username']");
         this.passwordInput = page.locator("input[name='password']");
         this.loginButton = page.locator("button[type='submit']");
+        this.errorMessage = page.getByRole('alert');
     }
 
     async goToOrageHRMLoginPage() {

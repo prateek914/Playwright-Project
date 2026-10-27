@@ -11,6 +11,7 @@ test('global setup for login', async ({page, fixtureLogin,dashboardPage, commonu
     await expect(page).toHaveURL(`${process.env.BASE_URL}/web/index.php/dashboard/index`);
     console.log("dashboard page");
     await expect(dashboardPage.dashboardTitle).toHaveText('Dashboard');
+    // store the storage(cookie and localStorage) state to a file for later use
     await page.context().storageState({ path: './playwright/.auth/.auth.json' });
 
 })

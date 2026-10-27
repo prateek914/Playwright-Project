@@ -6,7 +6,8 @@
   "scripts": {
     "test_Demo": "cross-env ENV_NAME=demo npx playwright test",
     "test_Demo_CR_HD": "cross-env ENV_NAME=demo npx playwright test --project=chromium --headed",
-    "test_Demo_CR_NH": "cross-env ENV_NAME=demo npx playwright test --project=chromium"
+    "test_Demo_CR_NH": "cross-env ENV_NAME=demo npx playwright test --project=chromium",
+    "test_Demo_CR_UI": "cross-env ENV_NAME=demo npx playwright test --ui"
   },
   "keywords": [],
   "author": "",
@@ -15,8 +16,7 @@
   "devDependencies": {
     "@playwright/test": "^1.64.0",
     "@types/crypto-js": "^4.2.2",
-    "@types/node": "^26.6.5",
-    "typescript": "^7.0.2"
+    "@types/node": "^26.6.5"
   },
   "dependencies": {
     "cross-env": "^10.1.0",

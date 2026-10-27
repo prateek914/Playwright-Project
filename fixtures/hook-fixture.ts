@@ -17,3 +17,5 @@ export const test =
             await userPage.userLogout();
         }
     })
+
+export { expect } from '@playwright/test';
